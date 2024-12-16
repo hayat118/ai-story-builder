@@ -14,8 +14,11 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@nextui-org/button";
+import { UserButton, useUser } from "@clerk/nextjs";
 
 function Header() {
+  const { user, isSignedIn } = useUser();
+
   const MenuList = [
     {
       name: "Home",
@@ -60,7 +63,13 @@ function Header() {
         ))}
       </NavbarContent>
       <NavbarContent justify="end">
-        <Button color="primary">Get Started</Button>
+        <Link href={"/dashboard"}>
+          <Button color="primary">
+            {isSignedIn ? "Dashboard" : "Get Started"}
+          </Button>
+        </Link>
+
+        <UserButton />
       </NavbarContent>
       <NavbarMenu>
         {MenuList.map((item, index) => (
