@@ -1,32 +1,30 @@
-"use client";
-
 import Image from "next/image";
 import React, { useState } from "react";
 
-function StoryType() {
+function AgeGroup() {
   const [selectedOption, setSelectedOption] = useState<string>();
 
   const OptionList = [
     {
-      label: "Story Book",
-      imageUrl: "/story.png",
+      label: "0-2 Years",
+      imageUrl: "/02.png",
       isFree: true,
     },
     {
-      label: "Bed  Story",
-      imageUrl: "/bed.png",
+      label: "3-5 Years",
+      imageUrl: "/35.png",
       isFree: true,
     },
     {
-      label: "Educational",
-      imageUrl: "/education.png",
+      label: "6-8 Years",
+      imageUrl: "/68.png",
       isFree: true,
     },
   ];
 
   return (
     <div>
-      <label className="font-bold text-2xl text-primary">2.Story Type</label>
+      <label className="font-bold text-2xl text-primary">3.Age Group</label>
       <div className="grid grid-cols-3 gap-3 mt-3 ">
         {OptionList.map((item, index) => (
           <div
@@ -36,7 +34,7 @@ function StoryType() {
             }`}
             onClick={() => setSelectedOption(item.label)}
           >
-            <h2 className="absolute bottom-3 text-white text-center w-full ">
+            <h2 className="absolute top-3 text-white text-center w-full ">
               {item.label}
             </h2>
             <Image
@@ -53,4 +51,4 @@ function StoryType() {
   );
 }
 
-export default StoryType;
+export default AgeGroup;

@@ -1,32 +1,35 @@
-"use client";
-
 import Image from "next/image";
 import React, { useState } from "react";
 
-function StoryType() {
+function ImageStyle() {
   const [selectedOption, setSelectedOption] = useState<string>();
 
   const OptionList = [
     {
-      label: "Story Book",
-      imageUrl: "/story.png",
+      label: "3D Cartton",
+      imageUrl: "/3d.png",
       isFree: true,
     },
     {
-      label: "Bed  Story",
-      imageUrl: "/bed.png",
+      label: "Paper Cut",
+      imageUrl: "/papercut.png",
       isFree: true,
     },
     {
-      label: "Educational",
-      imageUrl: "/education.png",
+      label: "Water Color",
+      imageUrl: "/watercolor.png",
+      isFree: true,
+    },
+    {
+      label: "Pixel Style",
+      imageUrl: "/pixel.png",
       isFree: true,
     },
   ];
 
   return (
     <div>
-      <label className="font-bold text-2xl text-primary">2.Story Type</label>
+      <label className="font-bold text-2xl text-primary">3.Age Group</label>
       <div className="grid grid-cols-3 gap-3 mt-3 ">
         {OptionList.map((item, index) => (
           <div
@@ -42,9 +45,9 @@ function StoryType() {
             <Image
               src={item.imageUrl}
               alt={item.label}
-              width={200}
+              width={150}
               height={300}
-              className="object-cover h-[200px] rounded-2xl"
+              className="object-cover h-[100px] rounded-2xl"
             />
           </div>
         ))}
@@ -53,4 +56,4 @@ function StoryType() {
   );
 }
 
-export default StoryType;
+export default ImageStyle;
