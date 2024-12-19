@@ -1,7 +1,8 @@
 import Image from "next/image";
 import React, { useState } from "react";
+import { OptionField } from "./StoryType";
 
-function ImageStyle() {
+function ImageStyle({ userSelection }: any) {
   const [selectedOption, setSelectedOption] = useState<string>();
 
   const OptionList = [
@@ -26,10 +27,19 @@ function ImageStyle() {
       isFree: true,
     },
   ];
+  //
+  const onUserSelect = (item: OptionField) => {
+    setSelectedOption(item.label);
+    userSelection({
+      fieldValue: item?.label,
+      fieldName: "imageStyle",
+    });
+  };
+  //
 
   return (
     <div>
-      <label className="font-bold text-2xl text-primary">3.Age Group</label>
+      <label className="font-bold text-2xl text-primary">4.Image Style</label>
       <div className="grid grid-cols-3 gap-3 mt-3 ">
         {OptionList.map((item, index) => (
           <div
@@ -37,7 +47,7 @@ function ImageStyle() {
             className={`relative grayscale hover:grayscale-0 cursor-pointer  ${
               selectedOption == item.label ? "grayscale-0" : "grayscale "
             }`}
-            onClick={() => setSelectedOption(item.label)}
+            onClick={() => onUserSelect(item)}
           >
             <h2 className="absolute bottom-3 text-white text-center w-full ">
               {item.label}

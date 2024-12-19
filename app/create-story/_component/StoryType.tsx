@@ -3,7 +3,13 @@
 import Image from "next/image";
 import React, { useState } from "react";
 
-function StoryType() {
+export interface OptionField {
+  label: string;
+  imageUrl: string;
+  isFree: boolean;
+}
+
+function StoryType({ userSelection }: any) {
   const [selectedOption, setSelectedOption] = useState<string>();
 
   const OptionList = [
@@ -24,6 +30,14 @@ function StoryType() {
     },
   ];
 
+  const onUserSelect = (item: OptionField) => {
+    setSelectedOption(item.label);
+    userSelection({
+      fieldValue: item?.label,
+      fieldName: "storyType",
+    });
+  };
+
   return (
     <div>
       <label className="font-bold text-2xl text-primary">2.Story Type</label>
@@ -34,7 +48,7 @@ function StoryType() {
             className={`relative grayscale hover:grayscale-0 cursor-pointer  ${
               selectedOption == item.label ? "grayscale-0" : "grayscale "
             }`}
-            onClick={() => setSelectedOption(item.label)}
+            onClick={() => onUserSelect(item)}
           >
             <h2 className="absolute bottom-3 text-white text-center w-full ">
               {item.label}

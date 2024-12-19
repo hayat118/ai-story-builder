@@ -5,6 +5,7 @@ import StorySubject from "./_component/StorySubject";
 import StoryType from "./_component/StoryType";
 import AgeGroup from "./_component/AgeGroup";
 import ImageStyle from "./_component/ImageStyle";
+import { Button } from "@nextui-org/button";
 
 export interface fieldData {
   fieldName: String;
@@ -31,11 +32,16 @@ function CreateStory() {
         <StorySubject userSelection={onHandleUserSelection} />
 
         {/* story type */}
-        <StoryType />
+        <StoryType userSelection={onHandleUserSelection} />
         {/* age group */}
-        <AgeGroup />
+        <AgeGroup userSelection={onHandleUserSelection} />
         {/* Image style */}
-        <ImageStyle />
+        <ImageStyle userSelection={onHandleUserSelection} />
+      </div>
+      <div className="flex justify-end my-10">
+        <Button color="primary" className="p-6 text-xl">
+          Generate Story
+        </Button>
       </div>
     </div>
   );
