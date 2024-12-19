@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import StorySubject from "./_component/StorySubject";
 import StoryType from "./_component/StoryType";
 import AgeGroup from "./_component/AgeGroup";
@@ -8,13 +8,26 @@ import ImageStyle from "./_component/ImageStyle";
 import { Button } from "@nextui-org/button";
 
 export interface fieldData {
-  fieldName: String;
-  fieldValue: String;
+  fieldName: string;
+  fieldValue: string;
+}
+export interface formDataType {
+  storySubject: string;
+  storyType: string;
+  imageStyle: string;
+  ageGroup: string;
 }
 
 function CreateStory() {
+  const [formData, setFormData] = useState<formDataType>();
+
+  // used to add data to form
   const onHandleUserSelection = (data: fieldData) => {
-    console.log(data, "abbbb");
+    setFormData((prev: any) => ({
+      ...prev,
+      [data.fieldName]: data.fieldValue,
+    }));
+    console.log(formData, "form");
   };
 
   return (
