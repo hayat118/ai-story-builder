@@ -6,6 +6,10 @@ import StoryType from "./_component/StoryType";
 import AgeGroup from "./_component/AgeGroup";
 import ImageStyle from "./_component/ImageStyle";
 import { Button } from "@nextui-org/button";
+import { chatSession } from "@/config/GeminiAi";
+
+//
+const CREATE_STORY_PROMPT = process.env.NEXT_PUBLIC_CREATE_STORY_PROMPT;
 
 export interface fieldData {
   fieldName: string;
@@ -20,6 +24,7 @@ export interface formDataType {
 
 function CreateStory() {
   const [formData, setFormData] = useState<formDataType>();
+  const [loading, setLoading] = useState(false);
 
   // used to add data to form
   const onHandleUserSelection = (data: fieldData) => {
@@ -28,6 +33,31 @@ function CreateStory() {
       [data.fieldName]: data.fieldValue,
     }));
     console.log(formData, "form");
+  };
+  //
+  const GenerateStory = async () => {
+    setLoading(true);
+    const FINAL_PROMPT = CREATE_STORY_PROMPT?.replace(
+      "{ageGroup}",
+      formData?.ageGroup ?? ""
+    )
+      .replace("{storyType}", formData?.storyType ?? "")
+      .replace("{storySubject}", formData?.storySubject ?? "")
+      .replace("{imageStyle}", formData?.imageStyle ?? "");
+    // Genarate AI Story
+    try {
+      // console.log(FINAL_PROMPT, "fi");
+      const result = await chatSession.sendMessage(FINAL_PROMPT);
+      console.log(result?.response.text());
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+
+    // Save in DB
+
+    // Generate Image
   };
 
   return (
@@ -52,7 +82,12 @@ function CreateStory() {
         <ImageStyle userSelection={onHandleUserSelection} />
       </div>
       <div className="flex justify-end my-10">
-        <Button color="primary" className="p-6 text-xl">
+        <Button
+          color="primary"
+          className="p-6 text-xl"
+          disabled={loading}
+          onClick={GenerateStory}
+        >
           Generate Story
         </Button>
       </div>
