@@ -120,7 +120,7 @@ function CreateStory() {
           Generate Story
         </Button>
       </div>
-      <CustomLoader />
+      <CustomLoader isLoading={loading} />
     </div>
   );
 }
